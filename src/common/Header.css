@@ -1,0 +1,13 @@
+.app-header {
+  background-color: #263238;
+  height: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.logo {
+  margin-left: 24px;
+  color: white;
+  font-size: 18px;
+}

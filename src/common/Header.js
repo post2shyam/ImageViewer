@@ -4,8 +4,8 @@ import "./Header.css";
 class Header extends Component {
   render() {
     return (
-      <div>
-        <b>Image Viewer</b>
+      <div className="app-header">
+        <div className="logo">Image Viewer</div>
       </div>
     );
   }

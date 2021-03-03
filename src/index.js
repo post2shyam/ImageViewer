@@ -1,11 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Header from './common/Header'
-import './index.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import Login from "../src/screens/login/Login";
+import "./index.css";
 
 ReactDOM.render(
-    <span>
-        <Header/>
-    </span>, 
-    document.getElementById('root')
+  <span>
+    <Login />
+  </span>,
+  document.getElementById("root")
 );
