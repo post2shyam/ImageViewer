@@ -1,0 +1,19 @@
+.login-page {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  padding-right: 2%;
+  padding-left: 2%;
+}
+
+.input {
+  width: 450px;
+}
+
+.red {
+  color: red;
+}
