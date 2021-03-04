@@ -54,12 +54,10 @@ class Login extends Component {
       this.state.username === this.state.expectedUserName &&
       this.state.loginPassword === this.state.expectedPwd
     ) {
-      console.log("positive");
       // Store the facebook token to session store
       var instagramAccessToken = "sdfasdfsadfsdafdsfasdfsadfdsfas";
       sessionStorage.setItem("access-token", instagramAccessToken);
     } else {
-      console.log("negative");
       document.getElementById("passwordHint").innerText =
         "Incorrect username and/or password";
       this.setState({ loginPasswordRequired: "dispBlock" });
