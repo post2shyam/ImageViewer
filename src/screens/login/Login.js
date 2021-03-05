@@ -18,6 +18,9 @@ class Login extends Component {
 
       loginPasswordRequired: "dispNone",
       loginPassword: "",
+
+      expectedUserName: "hello",
+      expectedPwd: "world",
     };
   }
 
@@ -33,11 +36,32 @@ class Login extends Component {
     this.state.username === ""
       ? this.setState({ usernameRequired: "dispBlock" })
       : this.setState({ usernameRequired: "dispNone" });
-    this.state.loginPassword === ""
-      ? this.setState({ loginPasswordRequired: "dispBlock" })
-      : this.setState({ loginPasswordRequired: "dispNone" });
 
-    //TODO: Invoke facebook authentication to fetch token
+    if (this.state.loginPassword === "") {
+      document.getElementById("passwordHint").innerText = "required";
+      this.setState({ loginPasswordRequired: "dispBlock" });
+    } else {
+      this.setState({ loginPasswordRequired: "dispNone" });
+    }
+
+    //If userId or password is empty dont proceed further
+    if (this.state.username === "" || this.state.loginPassword === "") {
+      return;
+    }
+
+    //If the userId and password are not the expected one, show error message
+    if (
+      this.state.username === this.state.expectedUserName &&
+      this.state.loginPassword === this.state.expectedPwd
+    ) {
+      // Store the facebook token to session store
+      var instagramAccessToken = "sdfasdfsadfsdafdsfasdfsadfdsfas";
+      sessionStorage.setItem("access-token", instagramAccessToken);
+    } else {
+      document.getElementById("passwordHint").innerText =
+        "Incorrect username and/or password";
+      this.setState({ loginPasswordRequired: "dispBlock" });
+    }
   };
 
   render() {
@@ -75,7 +99,9 @@ class Login extends Component {
                   onChange={this.inputLoginPasswordChangeHandler}
                 />
                 <FormHelperText className={this.state.loginPasswordRequired}>
-                  <span className="red">required</span>
+                  <span id="passwordHint" className="red">
+                    required
+                  </span>
                 </FormHelperText>
               </FormControl>
               <br />
