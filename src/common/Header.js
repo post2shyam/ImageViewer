@@ -24,7 +24,7 @@ class Header extends Component {
               <Input disableUnderline={true} placeholder="Search..." />
             </div>
             <IconButton className="icon-button">
-              <img src={this.props.profile_picture} alt="sj"></img>
+              <img src={this.props.profile_picture} alt="sj" />
             </IconButton>
           </div>
         ) : (

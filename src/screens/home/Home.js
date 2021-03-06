@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Header from "../../common/Header";
+import InfoCard from "../../common/infocard/InfoCard";
 
 class Home extends Component {
   constructor() {
@@ -40,7 +41,16 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <Header isLoggedIn={true} profile_picture={this.getInstagramImage()} />
+        <div>
+          <Header
+            isLoggedIn={true}
+            profile_picture={this.getInstagramImage()}
+          />
+        </div>
+        {/* Body of Home screen */}
+        <div>
+          <InfoCard />
+        </div>
       </div>
     );
   }
