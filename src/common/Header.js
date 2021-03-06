@@ -1,17 +1,35 @@
 import React, { Component } from "react";
 import SearchIcon from "@material-ui/icons/Search";
-import InputBase from "@material-ui/core/InputBase";
+import Input from "@material-ui/core/Input";
+import IconButton from "@material-ui/core/IconButton";
+
 import "./Header.css";
 
 class Header extends Component {
+  constructor() {
+    super();
+    this.state = {
+      isLoggedIn: false,
+    };
+  }
+
   render() {
     return (
       <div className="app-header">
         <div className="logo">Image Viewer</div>
-        <div className="search">
-          <SearchIcon />
-          <InputBase placeholder="Search..."></InputBase>
-        </div>
+        {this.props.isLoggedIn ? (
+          <div className="parent">
+            <div className="search" id="loggedin-section">
+              <SearchIcon />
+              <Input disableUnderline={true} placeholder="Search..." />
+            </div>
+            <IconButton>
+              <img src={this.props.pic} alt="sj"></img>
+            </IconButton>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     );
   }

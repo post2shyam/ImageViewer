@@ -8,7 +8,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Button from "@material-ui/core/Button";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class Login extends Component {
   constructor() {
@@ -108,14 +108,14 @@ class Login extends Component {
               <br />
               <br />
               <div className="login-button">
-               <Link to="/home">
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={this.loginClickHandler}
-                >
-                  Login
-                </Button>
+                <Link to="/home">
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={this.loginClickHandler}
+                  >
+                    Login
+                  </Button>
                 </Link>
               </div>
             </CardContent>
