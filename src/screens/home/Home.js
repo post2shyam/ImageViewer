@@ -40,7 +40,7 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <Header isLoggedIn={true} imageUrl={this.getInstagramImage()} />
+        <Header isLoggedIn={true} profile_picture={this.getInstagramImage()} />
       </div>
     );
   }
