@@ -22,6 +22,9 @@ class Login extends Component {
 
       expectedUserName: "hello",
       expectedPwd: "world",
+
+      instagramAccessToken:
+        "IGQVJYZA28yYWhVZAFUxWlkzbkJZANC1iNy1RaGotMkIxRDVBVHA3NzZAWZAzJPU1ZAhVzNEY1hOMXdVUWxTUVBnR3lveUg1OFJtQ1R6TzRwR21mZAWluWW1ETmdyZAjkwWlpLOElZANHZAmd18yOVhlMTBsZAlRNVURoNW45SFhmMm9B",
     };
   }
 
@@ -56,8 +59,7 @@ class Login extends Component {
       this.state.loginPassword === this.state.expectedPwd
     ) {
       // Store the facebook token to session store
-      var instagramAccessToken = "sdfasdfsadfsdafdsfasdfsadfdsfas";
-      sessionStorage.setItem("access-token", instagramAccessToken);
+      sessionStorage.setItem("access-token", this.state.instagramAccessToken);
     } else {
       document.getElementById("passwordHint").innerText =
         "Incorrect username and/or password";

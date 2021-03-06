@@ -9,7 +9,6 @@
 .parent {
   display: flex;
   flex-direction: row;
-  background: aqua;
   justify-content: space-between;
 }
 
