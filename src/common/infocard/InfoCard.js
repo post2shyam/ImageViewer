@@ -11,7 +11,9 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import Input from "@material-ui/core/Input";
 
 const useStyles = (theme) => ({
   media: {
@@ -64,11 +66,14 @@ class InfoCard extends Component {
               </Typography>
             </CardActions>
             <CardActions enablespacing>
-              <TextField placeholder="Add a comment" />
+              <FormControl>
+                <InputLabel htmlFor="comment">Add a comment</InputLabel>
+                <Input className="input" id="comment" type="text" />
+              </FormControl>
               <Button
                 variant="contained"
                 color="primary"
-                onClick={this.loginClickHandler}
+                onClick={this.addClickHandler}
               >
                 ADD
               </Button>
