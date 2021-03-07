@@ -21,6 +21,23 @@ const useStyles = (theme) => ({
 });
 
 class InfoCard extends Component {
+  getFormatedTimeStamp(scrambledTimestamp) {
+    return (
+      scrambledTimestamp.getMonth() +
+      1 +
+      "/" +
+      scrambledTimestamp.getDate() +
+      "/" +
+      scrambledTimestamp.getFullYear() +
+      " " +
+      scrambledTimestamp.getHours() +
+      ":" +
+      scrambledTimestamp.getMinutes() +
+      ":" +
+      scrambledTimestamp.getSeconds()
+    );
+  }
+
   render() {
     const { classes } = this.props;
     return (
@@ -30,7 +47,7 @@ class InfoCard extends Component {
             <CardHeader
               avatar={<Avatar src={this.props.profile_url} alt="pic" />}
               title={this.props.username}
-              subheader={this.props.timestamp}
+              subheader={this.getFormatedTimeStamp(this.props.timestamp)}
             />
             <CardMedia className={classes.media} image={this.props.media_url} />
             <CardContent>
@@ -40,7 +57,7 @@ class InfoCard extends Component {
             </CardContent>
             <CardActions disableSpacing>
               <IconButton aria-label="add to favorites">
-                <FavoriteIcon />
+                <FavoriteIcon color="red" />
               </IconButton>
               <Typography variant="body1" color="black" component="p">
                 7 likes
