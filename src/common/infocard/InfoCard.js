@@ -28,11 +28,7 @@ class InfoCard extends Component {
         <Card className="cards-layout">
           <div className="posts">
             <CardHeader
-              avatar={
-                <Avatar aria-label="recipe">
-                  <img src={this.props.media_url} alt="pic" />
-                </Avatar>
-              }
+              avatar={<Avatar src={this.props.profile_url} alt="pic" />}
               title={this.props.username}
               subheader={this.props.timestamp}
             />
