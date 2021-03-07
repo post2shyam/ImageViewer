@@ -37,10 +37,6 @@ const useStyles = (theme) => ({
 });
 
 class InfoCard extends Component {
-  getCardIconImage() {
-    return "https://www.upgrad.com/favicon.ico";
-  }
-
   render() {
     const { classes } = this.props;
     return (
@@ -49,20 +45,16 @@ class InfoCard extends Component {
           <CardHeader
             avatar={
               <Avatar aria-label="recipe" className={classes.avatar}>
-                <img src={this.getCardIconImage()} alt="sj" />
+                <img src={this.props.media_url} alt="pic" />
               </Avatar>
             }
-            title="upgrad_sde"
-            subheader="03/10/2018 16:07:24"
+            title={this.props.username}
+            subheader={this.props.timestamp}
           />
-          <CardMedia
-            className={classes.media}
-            image="https://www.upgrad.com/favicon.ico"
-            title="Paella dish"
-          />
+          <CardMedia className={classes.media} image={this.props.media_url} />
           <CardContent>
             <Typography variant="body2" color="black" component="p">
-              PG certification in digital marketting
+              {this.props.caption}
             </Typography>
           </CardContent>
           <CardActions disableSpacing>
