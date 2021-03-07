@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Header from "../../common/Header";
 import InfoCard from "../../common/infocard/InfoCard";
+import "./Home.css";
 
 class Home extends Component {
   constructor() {
@@ -89,12 +90,14 @@ class Home extends Component {
             profile_picture={this.getInstagramImage()}
           />
         </div>
-        {/* Body of Home screen */}
-        {this.state.instagramPosts.map((entry) => (
-          <div>
-            <InfoCard {...entry} />
-          </div>
-        ))}
+        <div className="container">
+          {/* Body of Home screen */}
+          {this.state.instagramPosts.map((entry) => (
+            <div>
+              <InfoCard {...entry} />
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
