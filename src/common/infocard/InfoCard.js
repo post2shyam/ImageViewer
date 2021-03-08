@@ -14,6 +14,7 @@ import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
+import { TextField } from "@material-ui/core";
 
 const useStyles = (theme) => ({
   media: {
@@ -23,6 +24,24 @@ const useStyles = (theme) => ({
 });
 
 class InfoCard extends Component {
+  constructor() {
+    super();
+    this.state = {
+      comments: [],
+    };
+  }
+
+  addClickHandler = (event) => {
+    //Update the collection of comments
+    const currentComment = document.getElementById("comment").value;
+    const commentsCollection = this.state.comments.slice();
+    commentsCollection.push(currentComment);
+    this.setState({ comments: commentsCollection });
+
+    //Empty the field
+    document.getElementById("comment").value = "";
+  };
+
   getFormatedTimeStamp(scrambledTimestamp) {
     return (
       scrambledTimestamp.getMonth() +
@@ -65,6 +84,14 @@ class InfoCard extends Component {
                 7 likes
               </Typography>
             </CardActions>
+            {this.state.comments.map((comment) => (
+              <CardActions disableSpacing>
+                <span>
+                  <b>{this.props.username + ":"}</b>
+                </span>
+                <p>{comment}</p>
+              </CardActions>
+            ))}
             <CardActions enablespacing>
               <FormControl>
                 <InputLabel htmlFor="comment">Add a comment</InputLabel>
