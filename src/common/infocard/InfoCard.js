@@ -7,13 +7,13 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Avatar from "@material-ui/core/Avatar";
-import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
-import FavoriteIcon from "@material-ui/icons/Favorite";
 import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 
 const useStyles = (theme) => ({
   media: {
@@ -28,6 +28,9 @@ class InfoCard extends Component {
     this.state = {
       comments: [],
       dummyHashTags: ["#digital ", "#marketing "],
+      likeIcon: "dispBlock",
+      likedIcon: "dispNone",
+      likesCount: 1,
     };
   }
 
@@ -40,6 +43,26 @@ class InfoCard extends Component {
 
     //Empty the field
     document.getElementById("comment").value = "";
+  };
+
+  //function to add a like to a post
+  likeClickHandler = (event) => {
+    const currentLikeCount = this.state.likesCount + 1;
+    this.setState({
+      likeIcon: "dispNone",
+      likedIcon: "dispBlock",
+      likesCount: currentLikeCount,
+    });
+  };
+
+  //function to unlike a post
+  likedClickHandler = (event) => {
+    const currentLikeCount = this.state.likesCount - 1;
+    this.setState({
+      likeIcon: "dispBlock",
+      likedIcon: "dispNone",
+      likesCount: currentLikeCount,
+    });
   };
 
   getFormatedTimeStamp(scrambledTimestamp) {
@@ -86,12 +109,27 @@ class InfoCard extends Component {
               ))}
             </CardContent>
             <CardActions disableSpacing>
-              <IconButton aria-label="add to favorites">
-                <FavoriteIcon color="red" />
-              </IconButton>
-              <Typography variant="body1" color="black" component="p">
-                7 likes
-              </Typography>
+              <div className="likes">
+                <div
+                  className={this.state.likeIcon}
+                  onClick={this.likeClickHandler}
+                >
+                  <FavoriteBorderIcon />
+                </div>
+                <div className={this.state.likedIcon}>
+                  <FavoriteIcon
+                    style={{ color: "red" }}
+                    onClick={this.likedClickHandler}
+                  />
+                </div>
+                <span style={{ marginLeft: 10 }}>
+                  {this.state.likesCount < 2 ? (
+                    <div> {this.state.likesCount} like </div>
+                  ) : (
+                    <div> {this.state.likesCount} likes </div>
+                  )}
+                </span>
+              </div>
             </CardActions>
             {this.state.comments.map((comment) => (
               <CardActions disableSpacing>
