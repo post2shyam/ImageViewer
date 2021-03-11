@@ -7,12 +7,14 @@ import MenuItem from "@material-ui/core/MenuItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
 import "./Header.css";
 
 const StyledMenu = withStyles({
   paper: {
     border: "4px",
     backgroundColor: "#ededed",
+    marginTop: "6px",
   },
 })((props) => (
   <Menu
@@ -52,6 +54,11 @@ class Header extends Component {
     this.setState({ type: null });
   };
 
+  //function to clear the session storage and redirect to the login page
+  logoutHandler = () => {
+    sessionStorage.removeItem("access-token");
+  };
+
   render() {
     return (
       <div className="app-header">
@@ -87,11 +94,18 @@ class Header extends Component {
                 />
               </StyledMenuItem>
               <hr style={{ marginLeft: 15, marginRight: 15 }} />
-              <StyledMenuItem>
-                <Typography type="body2" style={{ fontWeight: "bold" }}>
-                  Logout
-                </Typography>
-              </StyledMenuItem>
+              <Link to="/" style={{ color: "black", textDecoration: "none" }}>
+                <StyledMenuItem>
+                  <ListItemText
+                    primary={
+                      <Typography type="body2" style={{ fontWeight: "bold" }}>
+                        Logout
+                      </Typography>
+                    }
+                    onClick={this.logoutHandler}
+                  />
+                </StyledMenuItem>
+              </Link>
             </StyledMenu>
           </div>
         ) : (
