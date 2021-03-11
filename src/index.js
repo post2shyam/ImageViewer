@@ -1,10 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import RoutingController from "../src/common/routingcontroller/RoutingController"
+import "./index.css";
 
 ReactDOM.render(
-    <span>
-        Image Viewer
-    </span>, 
-    document.getElementById('root')
+  <span>
+    <RoutingController />
+  </span>,
+  document.getElementById("root")
 );
