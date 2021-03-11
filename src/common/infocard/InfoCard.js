@@ -14,7 +14,6 @@ import Button from "@material-ui/core/Button";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
-import { TextField } from "@material-ui/core";
 
 const useStyles = (theme) => ({
   media: {
@@ -28,6 +27,7 @@ class InfoCard extends Component {
     super();
     this.state = {
       comments: [],
+      dummyHashTags: ["#digital ", "#marketing "],
     };
   }
 
@@ -75,6 +75,15 @@ class InfoCard extends Component {
               <Typography variant="body2" color="black" component="p">
                 {this.props.caption}
               </Typography>
+              {this.state.dummyHashTags.map((hastag) => (
+                <Typography
+                  variant="body2"
+                  style={{ color: "blue" }}
+                  display="inline"
+                >
+                  {hastag}
+                </Typography>
+              ))}
             </CardContent>
             <CardActions disableSpacing>
               <IconButton aria-label="add to favorites">
@@ -86,10 +95,16 @@ class InfoCard extends Component {
             </CardActions>
             {this.state.comments.map((comment) => (
               <CardActions disableSpacing>
-                <span>
-                  <b>{this.props.username + ":"}</b>
-                </span>
-                <p>{comment}</p>
+                <Typography
+                  variant="body2"
+                  style={{ fontWeight: "bold" }}
+                  display="inline"
+                >
+                  {this.props.username + ":"}
+                </Typography>
+                <Typography variant="body2" display="inline">
+                  {comment}
+                </Typography>
               </CardActions>
             ))}
             <CardActions enablespacing>
