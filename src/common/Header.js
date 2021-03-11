@@ -59,6 +59,17 @@ class Header extends Component {
     sessionStorage.removeItem("access-token");
   };
 
+  inputChangeHandler = (e) => {
+    const filteredList = this.props.list.filter((post) => {
+      return (
+        String(post.caption)
+          .toLowerCase()
+          .indexOf(e.target.value.toLowerCase()) >= 0
+      );
+    });
+    this.props.callbackFromHome(filteredList);
+  };
+
   render() {
     return (
       <div className="app-header">
@@ -67,7 +78,11 @@ class Header extends Component {
           <div className="parent">
             <div className="search" id="loggedin-section">
               <SearchIcon />
-              <Input disableUnderline={true} placeholder="Search..." />
+              <Input
+                disableUnderline={true}
+                placeholder="Search..."
+                onChange={this.inputChangeHandler}
+              />
             </div>
             <IconButton>
               <img

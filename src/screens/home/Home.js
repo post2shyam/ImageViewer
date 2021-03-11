@@ -9,6 +9,7 @@ class Home extends Component {
     this.state = {
       profilePic: "",
       instagramPosts: [],
+      searchPost: [],
     };
   }
 
@@ -61,9 +62,11 @@ class Home extends Component {
           //Update the current collection of insta posts
           let currentInstaPostCollection = that.state.instagramPosts.slice();
           currentInstaPostCollection.push(instagramPostDetails);
+
           that.setState({
             instagramPosts: currentInstaPostCollection,
             profilePic: instagramPostDetails.profile_url,
+            searchPost: currentInstaPostCollection,
           });
         }
       }
@@ -82,11 +85,20 @@ class Home extends Component {
     xhr.send(data);
   }
 
+  filteredListHandler = (filteredPosts) => {
+    this.setState({ instagramPosts: filteredPosts });
+  };
+
   render() {
     return (
       <div>
         <div>
-          <Header isLoggedIn={true} profile_picture={this.state.profilePic} />
+          <Header
+            isLoggedIn={true}
+            profile_picture={this.state.profilePic}
+            list={this.state.searchPost}
+            callbackFromHome={this.filteredListHandler}
+          />
         </div>
         <div className="container">
           {/* Body of Home screen */}
