@@ -61,7 +61,10 @@ class Home extends Component {
           //Update the current collection of insta posts
           let currentInstaPostCollection = that.state.instagramPosts.slice();
           currentInstaPostCollection.push(instagramPostDetails);
-          that.setState({ instagramPosts: currentInstaPostCollection });
+          that.setState({
+            instagramPosts: currentInstaPostCollection,
+            profilePic: instagramPostDetails.profile_url,
+          });
         }
       }
     });
@@ -79,18 +82,11 @@ class Home extends Component {
     xhr.send(data);
   }
 
-  getInstagramImage() {
-    return "https://www.upgrad.com/favicon.ico";
-  }
-
   render() {
     return (
       <div>
         <div>
-          <Header
-            isLoggedIn={true}
-            profile_picture={this.getInstagramImage()}
-          />
+          <Header isLoggedIn={true} profile_picture={this.state.profilePic} />
         </div>
         <div className="container">
           {/* Body of Home screen */}
