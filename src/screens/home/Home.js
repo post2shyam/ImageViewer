@@ -1,7 +1,14 @@
 import React, { Component } from "react";
+import { useHistory } from "react-router-dom";
 import Header from "../../common/Header";
 import InfoCard from "../../common/infocard/InfoCard";
 import "./Home.css";
+
+const NavigateBackToLoginPage = (props) => {
+  const history = useHistory();
+  history.push("/");
+  return "";
+};
 
 class Home extends Component {
   constructor() {
@@ -92,22 +99,28 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <div>
-          <Header
-            isLoggedIn={true}
-            profile_picture={this.state.profilePic}
-            list={this.state.searchPost}
-            callbackFromHome={this.filteredListHandler}
-          />
-        </div>
-        <div className="container">
-          {/* Body of Home screen */}
-          {this.state.instagramPosts.map((entry) => (
+        {sessionStorage.getItem("access-token") !== null ? (
+          <div>
             <div>
-              <InfoCard {...entry} />
+              <Header
+                isLoggedIn={true}
+                profile_picture={this.state.profilePic}
+                list={this.state.searchPost}
+                callbackFromHome={this.filteredListHandler}
+              />
             </div>
-          ))}
-        </div>
+            <div className="container">
+              {/* Body of Home screen */}
+              {this.state.instagramPosts.map((entry) => (
+                <div>
+                  <InfoCard {...entry} />
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <NavigateBackToLoginPage />
+        )}
       </div>
     );
   }
