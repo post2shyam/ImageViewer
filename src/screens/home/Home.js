@@ -23,7 +23,7 @@ class Home extends Component {
         console.log("Response:\n" + this.responseText);
         let info = JSON.parse(this.responseText).data;
         info.map((eachItem) => {
-          that.getImages(eachItem);
+          return that.getImages(eachItem);
         });
       }
     });
