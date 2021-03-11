@@ -36,13 +36,13 @@ class InfoCard extends Component {
 
   addClickHandler = (event) => {
     //Update the collection of comments
-    const currentComment = document.getElementById("comment").value;
+    const commentId = "comment" + this.props.id;
+    const currentComment = document.getElementById(commentId).value;
     const commentsCollection = this.state.comments.slice();
     commentsCollection.push(currentComment);
     this.setState({ comments: commentsCollection });
-
     //Empty the field
-    document.getElementById("comment").value = "";
+    document.getElementById(commentId).value = "";
   };
 
   //function to add a like to a post
@@ -148,7 +148,11 @@ class InfoCard extends Component {
             <CardActions enablespacing>
               <FormControl>
                 <InputLabel htmlFor="comment">Add a comment</InputLabel>
-                <Input className="input" id="comment" type="text" />
+                <Input
+                  className="input"
+                  id={"comment" + this.props.id}
+                  type="text"
+                />
               </FormControl>
               <Button
                 variant="contained"
