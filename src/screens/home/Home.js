@@ -104,6 +104,7 @@ class Home extends Component {
             <div>
               <Header
                 isLoggedIn={true}
+                showSearchBar={true}
                 profile_picture={this.state.profilePic}
                 list={this.state.searchPost}
                 callbackFromHome={this.filteredListHandler}

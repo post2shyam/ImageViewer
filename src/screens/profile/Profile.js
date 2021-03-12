@@ -22,6 +22,7 @@ class Profile extends Component {
           <div>
             <Header
               isLoggedIn={true}
+              showSearchBar={false}
               profile_picture={this.state.profilePic}
               list={this.state.searchPost}
               callbackFromHome={this.filteredListHandler}

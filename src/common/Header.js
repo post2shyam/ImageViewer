@@ -41,6 +41,7 @@ class Header extends Component {
     super();
     this.state = {
       isLoggedIn: false,
+      showSearchBar: false,
     };
   }
 
@@ -76,14 +77,18 @@ class Header extends Component {
         <div className="logo">Image Viewer</div>
         {this.props.isLoggedIn ? (
           <div className="parent">
-            <div className="search" id="loggedin-section">
-              <SearchIcon />
-              <Input
-                disableUnderline={true}
-                placeholder="Search..."
-                onChange={this.inputChangeHandler}
-              />
-            </div>
+            {this.props.showSearchBar ? (
+              <div className="search" id="loggedin-section">
+                <SearchIcon />
+                <Input
+                  disableUnderline={true}
+                  placeholder="Search..."
+                  onChange={this.inputChangeHandler}
+                />
+              </div>
+            ) : (
+              ""
+            )}
             <IconButton>
               <img
                 className="icon-button"
