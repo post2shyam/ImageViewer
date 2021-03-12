@@ -104,21 +104,30 @@ class Header extends Component {
               open={Boolean(this.state.type)}
               onClose={this.closeHandler}
             >
-              <StyledMenuItem>
-                <Link
-                  to="/profile"
-                  style={{ color: "black", textDecoration: "none" }}
-                >
-                  <ListItemText
-                    primary={
-                      <Typography type="body2" style={{ fontWeight: "bold" }}>
-                        My Account
-                      </Typography>
-                    }
-                  />
-                </Link>
-              </StyledMenuItem>
-              <hr style={{ marginLeft: 15, marginRight: 15 }} />
+              {this.props.showSearchBar ? (
+                <div>
+                  <StyledMenuItem>
+                    <Link
+                      to="/profile"
+                      style={{ color: "black", textDecoration: "none" }}
+                    >
+                      <ListItemText
+                        primary={
+                          <Typography
+                            type="body2"
+                            style={{ fontWeight: "bold" }}
+                          >
+                            My Account
+                          </Typography>
+                        }
+                      />
+                    </Link>
+                  </StyledMenuItem>
+                  <hr style={{ marginLeft: 15, marginRight: 15 }} />
+                </div>
+              ) : (
+                ""
+              )}
               <Link to="/" style={{ color: "black", textDecoration: "none" }}>
                 <StyledMenuItem>
                   <ListItemText
