@@ -100,13 +100,18 @@ class Header extends Component {
               onClose={this.closeHandler}
             >
               <StyledMenuItem>
-                <ListItemText
-                  primary={
-                    <Typography type="body2" style={{ fontWeight: "bold" }}>
-                      My Account
-                    </Typography>
-                  }
-                />
+                <Link
+                  to="/profile"
+                  style={{ color: "black", textDecoration: "none" }}
+                >
+                  <ListItemText
+                    primary={
+                      <Typography type="body2" style={{ fontWeight: "bold" }}>
+                        My Account
+                      </Typography>
+                    }
+                  />
+                </Link>
               </StyledMenuItem>
               <hr style={{ marginLeft: 15, marginRight: 15 }} />
               <Link to="/" style={{ color: "black", textDecoration: "none" }}>

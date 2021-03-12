@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Login from "../../screens/login/Login";
 import Home from "../../screens/home/Home";
+import Profile from "../../screens/profile/Profile";
 
 class RoutingController extends Component {
   constructor() {
@@ -12,12 +13,15 @@ class RoutingController extends Component {
   render() {
     return (
       <Router>
-        <Route exact path="/" render={(props) => <Login />}></Route>
-        <Route
-          exact
-          path="/home"
-          render={(props) => <Home baseUrl={this.baseUrl} />}
-        ></Route>
+        <Switch>
+          <Route exact path="/" render={(props) => <Login />} />
+          <Route
+            exact
+            path="/home"
+            render={(props) => <Home baseUrl={this.baseUrl} />}
+          />
+          <Route exact path="/profile" render={(props) => <Profile />} />
+        </Switch>
       </Router>
     );
   }
