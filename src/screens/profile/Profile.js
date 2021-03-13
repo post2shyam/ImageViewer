@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Header from "../../common/Header";
 import { useHistory } from "react-router-dom";
+import profilePic from "../../assets/images/profile_pic.jpg";
 import "./Profile.css";
 
 const NavigateBackToLoginPage = (props) => {
@@ -12,7 +13,9 @@ const NavigateBackToLoginPage = (props) => {
 class Profile extends Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      profilePic: profilePic,
+    };
   }
 
   render() {
