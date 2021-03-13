@@ -27,7 +27,7 @@ class InfoCard extends Component {
     super();
     this.state = {
       comments: [],
-      dummyHashTags: ["#digital ", "#marketing "],
+      dummyHashTags: [],
       likeIcon: "dispBlock",
       likedIcon: "dispNone",
       likesCount: 0,
@@ -83,7 +83,14 @@ class InfoCard extends Component {
   }
 
   componentDidMount() {
-    this.setState({ likesCount: this.props.likesCount });
+    // console.log(this.props.caption.match(/#\S+/g));
+    this.setState({
+      likesCount: this.props.likesCount,
+      dummyHashTags:
+        this.props.caption.match(/#\S+/g) == null
+          ? []
+          : this.props.caption.match(/#\S+/g),
+    });
   }
 
   render() {
@@ -102,13 +109,13 @@ class InfoCard extends Component {
               <Typography variant="body2" color="black" component="p">
                 {this.props.caption}
               </Typography>
-              {this.state.dummyHashTags.map((hastag) => (
+              {this.state.dummyHashTags.map((hashtag) => (
                 <Typography
                   variant="body2"
                   style={{ color: "blue" }}
                   display="inline"
                 >
-                  {hastag}
+                  {hashtag + " "}
                 </Typography>
               ))}
             </CardContent>
