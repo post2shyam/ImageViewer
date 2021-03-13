@@ -74,7 +74,18 @@ class Header extends Component {
   render() {
     return (
       <div className="app-header">
-        <div className="logo">Image Viewer</div>
+        {this.props.showSearchBar ? (
+          <div className="logo">Image Viewer</div>
+        ) : (
+          <Link
+            to="/home"
+            className="logo hovering"
+            style={{ textDecoration: "none" }}
+          >
+            <div>Image Viewer</div>
+          </Link>
+        )}
+
         {this.props.isLoggedIn ? (
           <div className="parent">
             {this.props.showSearchBar ? (
