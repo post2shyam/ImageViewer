@@ -63,6 +63,7 @@ class Home extends Component {
           instagramPostDetails.media_url = details.media_url;
           instagramPostDetails.username = details.username;
           instagramPostDetails.timestamp = new Date(details.timestamp);
+          instagramPostDetails.likesCount = Math.floor(Math.random() * 10);
           instagramPostDetails.profile_url =
             "https://instagram.fblr1-3.fna.fbcdn.net/v/t51.2885-19/11910245_492478310920718_1225190855_a.jpg?_nc_ht=instagram.fblr1-3.fna.fbcdn.net&_nc_ohc=0fVS9mzgF0cAX-mC0KZ&oh=f47edc5cb63b6bde88854ea72eb3ceaa&oe=606F6032";
 

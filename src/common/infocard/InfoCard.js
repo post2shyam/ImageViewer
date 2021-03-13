@@ -30,7 +30,7 @@ class InfoCard extends Component {
       dummyHashTags: ["#digital ", "#marketing "],
       likeIcon: "dispBlock",
       likedIcon: "dispNone",
-      likesCount: 1,
+      likesCount: 0,
     };
   }
 
@@ -80,6 +80,10 @@ class InfoCard extends Component {
       ":" +
       scrambledTimestamp.getSeconds()
     );
+  }
+
+  componentDidMount() {
+    this.setState({ likesCount: this.props.likesCount });
   }
 
   render() {
