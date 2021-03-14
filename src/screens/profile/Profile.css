@@ -64,3 +64,28 @@
   height: 45px;
   width: 45px;
 }
+
+.post-modal-image-container {
+  margin-right: 10px;
+  width: 300px;
+  height: 400px;
+}
+
+.post-modal-comments-section {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.post-modal-likes {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 150px 0px 0px 0px;
+}
+
+.post-modal-comments {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

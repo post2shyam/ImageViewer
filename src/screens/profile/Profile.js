@@ -15,6 +15,8 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import Avatar from "@material-ui/core/Avatar";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 
 function getModalStyle() {
   const top = 50;
@@ -66,6 +68,14 @@ class Profile extends Component {
       postList: [],
       postModal: false,
       imageUrl: "",
+      caption: "",
+      tags: [],
+      postComments: ["None"],
+      likeIcon: "",
+      likedIcon: "",
+      likesCount: 0,
+      postId: 0,
+      comment: "",
     };
   }
 
@@ -120,11 +130,9 @@ class Profile extends Component {
         post.likeIcon = "dispBlock";
         post.likedIcon = "dispNone";
         post.likesCount = Math.floor(Math.random() * 10);
-        post.postComments = "dispNone";
-        post.commentArea = "";
         post.clear = "";
         post.tags = post.caption.match(/#\S+/g);
-        post.commentContent = [];
+        post.postComments = [];
         post.timestamp = new Date(parsedData.timestamp);
         newStateArray = that.state.postList.slice();
         newStateArray.push(post);
@@ -181,7 +189,75 @@ class Profile extends Component {
     this.setState({
       imageUrl: clickedPost.media_url,
       username: clickedPost.username,
+      caption: clickedPost.caption,
+      tags: clickedPost.caption.match(/#\S+/g),
+      likeIcon: clickedPost.likeIcon,
+      likedIcon: clickedPost.likedIcon,
+      likesCount: clickedPost.likesCount,
+      postId: clickedPost.id,
+      postComments: clickedPost.postComments,
     });
+  };
+
+  //function to add a like to a post
+  likeClickHandler = (id) => {
+    let postList = this.state.postList;
+    postList.forEach(function (post) {
+      // if the post id equal to the liked post id then display
+      // the likedIcon, hide the likeIcon, and increment like count by 1
+      if (post.id === id) {
+        post.likesCount += 1;
+        post.likeIcon = "dispNone";
+        post.likedIcon = "dispBlock";
+        this.setState({
+          likeIcon: "dispNone",
+          likedIcon: "dispBlock",
+          likesCount: post.likesCount,
+        });
+      }
+    }, this);
+  };
+
+  //function to unlike a post
+  likedClickHandler = (id) => {
+    let postList = this.state.postList;
+    postList.forEach(function (post) {
+      // if the post id equal to the liked post id then display the likeIcon, hide the likedIcon, and decrement like count by 1
+      if (post.id === id) {
+        post.likesCount -= 1;
+        post.likeIcon = "dispBlock";
+        post.likedIcon = "dispNone";
+        this.setState({
+          likeIcon: "dispBlock",
+          likedIcon: "dispNone",
+          likesCount: post.likesCount,
+        });
+      }
+    }, this);
+  };
+
+  addCommentHandler = (id) => {
+    if (this.state.comment === "") {
+      alert("Cannot add Empty comment");
+    } else {
+      let postList = this.state.postList;
+      postList.forEach(function (post) {
+        //if the post id is equal to the commented post id, then add the comment in the postComments array
+        if (post.id === id) {
+          post.postComments.push(this.state.comment);
+          this.setState({
+            comment: "",
+            postComments: post.postComments,
+          });
+          post.clear = "";
+        }
+      }, this);
+    }
+  };
+
+  //function to handle the input change event
+  commentChangeHandler = (e) => {
+    this.setState({ comment: e.target.value });
   };
 
   render() {
@@ -310,7 +386,7 @@ class Profile extends Component {
                 >
                   <div style={getModalStyle()} className={classes.paper}>
                     <div className="post-modal-container">
-                      <div style={{ marginRight: "10px" }}>
+                      <div className="post-modal-image-container">
                         <img
                           src={this.state.imageUrl}
                           alt={this.state.username}
@@ -334,6 +410,87 @@ class Profile extends Component {
                           >
                             {this.state.username}
                           </Typography>
+                        </div>
+                        <hr />
+                        <Typography variant="body1" component="p">
+                          {this.state.caption}
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          style={{ color: "blue" }}
+                          display="inline"
+                        >
+                          {this.state.tags &&
+                            this.state.tags.map((value, key) => {
+                              return (
+                                <span
+                                  key={"tag" + key}
+                                  style={{ marginRight: 5 }}
+                                >
+                                  {" "}
+                                  {value}{" "}
+                                </span>
+                              );
+                            })}
+                        </Typography>
+                        <div className="post-modal-comments-section">
+                          {this.state.postComments.map((value, key) => {
+                            return (
+                              <span key={"comment" + key}>
+                                <span style={{ fontWeight: "bold" }}>
+                                  {this.state.username}:{" "}
+                                </span>
+                                {value}
+                              </span>
+                            );
+                          })}
+                        </div>
+                        <div className="post-modal-likes">
+                          <div
+                            className={this.state.likeIcon}
+                            onClick={() =>
+                              this.likeClickHandler(this.state.postId)
+                            }
+                          >
+                            <FavoriteBorderIcon />
+                          </div>
+                          <div className={this.state.likedIcon}>
+                            <FavoriteIcon
+                              style={{ color: "red" }}
+                              onClick={() =>
+                                this.likedClickHandler(this.state.postId)
+                              }
+                            />
+                          </div>
+                          <span style={{ marginLeft: 10, marginBottom: 8 }}>
+                            {this.state.likesCount < 2 ? (
+                              <div>{this.state.likesCount} like </div>
+                            ) : (
+                              <div>{this.state.likesCount} likes</div>
+                            )}
+                          </span>
+                        </div>
+                        <div className="post-modal-comments">
+                          <FormControl className="post-modal-control">
+                            <InputLabel htmlFor="comment">
+                              Add a comment
+                            </InputLabel>
+                            <Input
+                              comment={this.state.comment}
+                              onChange={this.commentChangeHandler}
+                              value={this.state.comment}
+                            />
+                          </FormControl>
+                          <Button
+                            variant="contained"
+                            color="primary"
+                            style={{ marginLeft: 20 }}
+                            onClick={() =>
+                              this.addCommentHandler(this.state.postId)
+                            }
+                          >
+                            ADD
+                          </Button>
                         </div>
                       </div>
                     </div>
