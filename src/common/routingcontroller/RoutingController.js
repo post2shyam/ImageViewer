@@ -20,7 +20,11 @@ class RoutingController extends Component {
             path="/home"
             render={(props) => <Home baseUrl={this.baseUrl} />}
           />
-          <Route exact path="/profile" render={(props) => <Profile />} />
+          <Route
+            exact
+            path="/profile"
+            render={(props) => <Profile baseUrl={this.baseUrl} />}
+          />
         </Switch>
       </Router>
     );
