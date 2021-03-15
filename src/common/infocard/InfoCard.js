@@ -22,18 +22,20 @@ const useStyles = (theme) => ({
   },
 });
 
+//Child component to be used inside Home Screen
 class InfoCard extends Component {
   constructor() {
     super();
     this.state = {
       comments: [],
-      dummyHashTags: ["#digital ", "#marketing "],
+      dummyHashTags: [],
       likeIcon: "dispBlock",
       likedIcon: "dispNone",
-      likesCount: 1,
+      likesCount: 0,
     };
   }
 
+  //On click of add button add a new comment to existing comments section of screen.
   addClickHandler = (event) => {
     //Update the collection of comments
     const commentId = "comment" + this.props.id;
@@ -65,12 +67,14 @@ class InfoCard extends Component {
     });
   };
 
+  //Format date time of the post to dd/mm/yyyy HH:MM:SS
   getFormatedTimeStamp(scrambledTimestamp) {
+    const date = ("0" + scrambledTimestamp.getDate()).slice(-2),
+      month = ("0" + (scrambledTimestamp.getMonth() + 1)).slice(-2);
     return (
-      scrambledTimestamp.getMonth() +
-      1 +
+      date +
       "/" +
-      scrambledTimestamp.getDate() +
+      month +
       "/" +
       scrambledTimestamp.getFullYear() +
       " " +
@@ -80,6 +84,16 @@ class InfoCard extends Component {
       ":" +
       scrambledTimestamp.getSeconds()
     );
+  }
+
+  componentDidMount() {
+    this.setState({
+      likesCount: this.props.likesCount,
+      dummyHashTags:
+        this.props.caption.match(/#\S+/g) == null
+          ? []
+          : this.props.caption.match(/#\S+/g),
+    });
   }
 
   render() {
@@ -98,13 +112,13 @@ class InfoCard extends Component {
               <Typography variant="body2" color="black" component="p">
                 {this.props.caption}
               </Typography>
-              {this.state.dummyHashTags.map((hastag) => (
+              {this.state.dummyHashTags.map((hashtag) => (
                 <Typography
                   variant="body2"
                   style={{ color: "blue" }}
                   display="inline"
                 >
-                  {hastag}
+                  {hashtag + " "}
                 </Typography>
               ))}
             </CardContent>

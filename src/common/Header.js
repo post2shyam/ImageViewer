@@ -41,6 +41,7 @@ class Header extends Component {
     super();
     this.state = {
       isLoggedIn: false,
+      showSearchBar: false,
     };
   }
 
@@ -73,17 +74,32 @@ class Header extends Component {
   render() {
     return (
       <div className="app-header">
-        <div className="logo">Image Viewer</div>
+        {this.props.showSearchBar ? (
+          <div className="logo">Image Viewer</div>
+        ) : (
+          <Link
+            to="/home"
+            className="logo hovering"
+            style={{ textDecoration: "none" }}
+          >
+            <div>Image Viewer</div>
+          </Link>
+        )}
+
         {this.props.isLoggedIn ? (
           <div className="parent">
-            <div className="search" id="loggedin-section">
-              <SearchIcon />
-              <Input
-                disableUnderline={true}
-                placeholder="Search..."
-                onChange={this.inputChangeHandler}
-              />
-            </div>
+            {this.props.showSearchBar ? (
+              <div className="search" id="loggedin-section">
+                <SearchIcon />
+                <Input
+                  disableUnderline={true}
+                  placeholder="Search..."
+                  onChange={this.inputChangeHandler}
+                />
+              </div>
+            ) : (
+              ""
+            )}
             <IconButton>
               <img
                 className="icon-button"
@@ -99,16 +115,30 @@ class Header extends Component {
               open={Boolean(this.state.type)}
               onClose={this.closeHandler}
             >
-              <StyledMenuItem>
-                <ListItemText
-                  primary={
-                    <Typography type="body2" style={{ fontWeight: "bold" }}>
-                      My Account
-                    </Typography>
-                  }
-                />
-              </StyledMenuItem>
-              <hr style={{ marginLeft: 15, marginRight: 15 }} />
+              {this.props.showSearchBar ? (
+                <div>
+                  <StyledMenuItem>
+                    <Link
+                      to="/profile"
+                      style={{ color: "black", textDecoration: "none" }}
+                    >
+                      <ListItemText
+                        primary={
+                          <Typography
+                            type="body2"
+                            style={{ fontWeight: "bold" }}
+                          >
+                            My Account
+                          </Typography>
+                        }
+                      />
+                    </Link>
+                  </StyledMenuItem>
+                  <hr style={{ marginLeft: 15, marginRight: 15 }} />
+                </div>
+              ) : (
+                ""
+              )}
               <Link to="/" style={{ color: "black", textDecoration: "none" }}>
                 <StyledMenuItem>
                   <ListItemText

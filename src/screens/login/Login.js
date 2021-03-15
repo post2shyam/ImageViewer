@@ -8,7 +8,6 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Button from "@material-ui/core/Button";
-import { Link } from "react-router-dom";
 
 class Login extends Component {
   constructor() {
@@ -20,11 +19,11 @@ class Login extends Component {
       loginPasswordRequired: "dispNone",
       loginPassword: "",
 
-      expectedUserName: "hello",
-      expectedPwd: "world",
+      expectedUserName: "admin",
+      expectedPwd: "admin",
 
       instagramAccessToken:
-        "IGQVJYZA28yYWhVZAFUxWlkzbkJZANC1iNy1RaGotMkIxRDVBVHA3NzZAWZAzJPU1ZAhVzNEY1hOMXdVUWxTUVBnR3lveUg1OFJtQ1R6TzRwR21mZAWluWW1ETmdyZAjkwWlpLOElZANHZAmd18yOVhlMTBsZAlRNVURoNW45SFhmMm9B",
+        "IGQVJXVUFLLTFOdWpuLTl0cjc1N0FWd29ieWFMUlFJa2QxckNEal8xQVo2Ullsd0E5U0pUNWNNLWxBRUUtMnJpa1QzMFhPREtOXzc4SzJ1UFFOTFBoVFFkeTY1SGo4aDAzRExvQ0QxbnJqOTY5X1hqOGwtSkhfb0ExdF9n",
     };
   }
 
@@ -60,6 +59,8 @@ class Login extends Component {
     ) {
       // Store the facebook token to session store
       sessionStorage.setItem("access-token", this.state.instagramAccessToken);
+      // launch home page
+      this.props.history.push("/home");
     } else {
       document.getElementById("passwordHint").innerText =
         "Incorrect username and/or password";
@@ -110,15 +111,13 @@ class Login extends Component {
               <br />
               <br />
               <div className="login-button">
-                <Link to="/home">
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={this.loginClickHandler}
-                  >
-                    Login
-                  </Button>
-                </Link>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={this.loginClickHandler}
+                >
+                  Login
+                </Button>
               </div>
             </CardContent>
           </Card>

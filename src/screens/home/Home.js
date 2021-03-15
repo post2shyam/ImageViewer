@@ -1,18 +1,27 @@
 import React, { Component } from "react";
+import { useHistory } from "react-router-dom";
 import Header from "../../common/Header";
 import InfoCard from "../../common/infocard/InfoCard";
+import profilePic from "../../assets/images/profile_pic.jpg";
 import "./Home.css";
+
+const NavigateBackToLoginPage = (props) => {
+  const history = useHistory();
+  history.push("/");
+  return "";
+};
 
 class Home extends Component {
   constructor() {
     super();
     this.state = {
-      profilePic: "",
+      profilePic: profilePic,
       instagramPosts: [],
       searchPost: [],
     };
   }
 
+  //REST apis to be invoked when this screen renders.
   componentDidMount() {
     let data = null;
     let xhr = new XMLHttpRequest();
@@ -56,16 +65,14 @@ class Home extends Component {
           instagramPostDetails.media_url = details.media_url;
           instagramPostDetails.username = details.username;
           instagramPostDetails.timestamp = new Date(details.timestamp);
-          instagramPostDetails.profile_url =
-            "https://instagram.fblr1-3.fna.fbcdn.net/v/t51.2885-19/11910245_492478310920718_1225190855_a.jpg?_nc_ht=instagram.fblr1-3.fna.fbcdn.net&_nc_ohc=0fVS9mzgF0cAX-mC0KZ&oh=f47edc5cb63b6bde88854ea72eb3ceaa&oe=606F6032";
-
+          instagramPostDetails.likesCount = Math.floor(Math.random() * 10);
+          instagramPostDetails.profile_url = that.state.profilePic;
           //Update the current collection of insta posts
           let currentInstaPostCollection = that.state.instagramPosts.slice();
           currentInstaPostCollection.push(instagramPostDetails);
 
           that.setState({
             instagramPosts: currentInstaPostCollection,
-            profilePic: instagramPostDetails.profile_url,
             searchPost: currentInstaPostCollection,
           });
         }
@@ -92,22 +99,29 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <div>
-          <Header
-            isLoggedIn={true}
-            profile_picture={this.state.profilePic}
-            list={this.state.searchPost}
-            callbackFromHome={this.filteredListHandler}
-          />
-        </div>
-        <div className="container">
-          {/* Body of Home screen */}
-          {this.state.instagramPosts.map((entry) => (
+        {sessionStorage.getItem("access-token") !== null ? (
+          <div>
             <div>
-              <InfoCard {...entry} />
+              <Header
+                isLoggedIn={true}
+                showSearchBar={true}
+                profile_picture={this.state.profilePic}
+                list={this.state.searchPost}
+                callbackFromHome={this.filteredListHandler}
+              />
             </div>
-          ))}
-        </div>
+            <div className="container">
+              {/* Body of Home screen */}
+              {this.state.instagramPosts.map((entry) => (
+                <div>
+                  <InfoCard {...entry} />
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <NavigateBackToLoginPage />
+        )}
       </div>
     );
   }
