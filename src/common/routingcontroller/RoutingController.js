@@ -14,7 +14,7 @@ class RoutingController extends Component {
     return (
       <Router>
         <Switch>
-          <Route exact path="/" render={(props) => <Login />} />
+          <Route exact path="/" render={(props) => <Login {...props} />} />
           <Route
             exact
             path="/home"
