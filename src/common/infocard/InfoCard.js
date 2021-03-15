@@ -22,6 +22,7 @@ const useStyles = (theme) => ({
   },
 });
 
+//Child component to be used inside Home Screen
 class InfoCard extends Component {
   constructor() {
     super();
@@ -34,6 +35,7 @@ class InfoCard extends Component {
     };
   }
 
+  //On click of add button add a new comment to existing comments section of screen.
   addClickHandler = (event) => {
     //Update the collection of comments
     const commentId = "comment" + this.props.id;
@@ -65,6 +67,7 @@ class InfoCard extends Component {
     });
   };
 
+  //Format date time of the post to dd/mm/yyyy HH:MM:SS
   getFormatedTimeStamp(scrambledTimestamp) {
     const date = ("0" + scrambledTimestamp.getDate()).slice(-2),
       month = ("0" + (scrambledTimestamp.getMonth() + 1)).slice(-2);
@@ -84,7 +87,6 @@ class InfoCard extends Component {
   }
 
   componentDidMount() {
-    // console.log(this.props.caption.match(/#\S+/g));
     this.setState({
       likesCount: this.props.likesCount,
       dummyHashTags:

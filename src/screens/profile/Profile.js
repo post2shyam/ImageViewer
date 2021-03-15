@@ -83,12 +83,12 @@ class Profile extends Component {
     };
   }
 
-  // Invoking APIs when component mounts
+  //Rest APIs to be invoked on load of this page
   componentDidMount() {
     let data = null;
     let xhr = new XMLHttpRequest();
     let that = this;
-    let accessToken = window.sessionStorage.getItem("access-token");
+    let accessToken = sessionStorage.getItem("access-token");
     xhr.addEventListener("readystatechange", function () {
       if (this.readyState === 4 && this.status === 200) {
         that.setState({
@@ -106,7 +106,6 @@ class Profile extends Component {
     });
 
     // https://graph.instagram.com/me/media?fields=id,caption&access_token=YourAccessToken
-
     xhr.open(
       "GET",
       this.props.baseUrl +
@@ -118,6 +117,7 @@ class Profile extends Component {
     xhr.send(data);
   }
 
+  //Invoke REST api to get details of each image.
   getImages(info) {
     let data = null;
     let xhr = new XMLHttpRequest();

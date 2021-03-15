@@ -21,6 +21,7 @@ class Home extends Component {
     };
   }
 
+  //REST apis to be invoked when this screen renders.
   componentDidMount() {
     let data = null;
     let xhr = new XMLHttpRequest();
