@@ -66,11 +66,12 @@ class InfoCard extends Component {
   };
 
   getFormatedTimeStamp(scrambledTimestamp) {
+    const date = ("0" + scrambledTimestamp.getDate()).slice(-2),
+      month = ("0" + (scrambledTimestamp.getMonth() + 1)).slice(-2);
     return (
-      scrambledTimestamp.getMonth() +
-      1 +
+      date +
       "/" +
-      scrambledTimestamp.getDate() +
+      month +
       "/" +
       scrambledTimestamp.getFullYear() +
       " " +
